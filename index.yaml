@@ -3,11 +3,11 @@ entries:
   nodejs:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-09-21T22:49:43.1298604+02:00
-    description: Fortstats helm chart for NodeJs deployments
-    digest: 4466c65da58ee4ae2cce09cc083aafcaf34159c555f68ce5d9d23866a1400b33
+    created: 2018-09-22T01:41:04.4084048+02:00
+    description: Helm chart for NodeJs deployments
+    digest: 1a18842f37d77831f4e0747dca84bb9524c5a4fe010f68697b173df322ecfe2b
     name: nodejs
     urls:
-    - nodejs/nodejs-1.0.0.tgz
-    version: 1.0.0
-generated: 2018-09-21T22:49:43.1288617+02:00
+    - nodejs/nodejs-1.0.1.tgz
+    version: 1.0.1
+generated: 2018-09-22T01:41:04.4084048+02:00
