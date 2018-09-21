@@ -1,0 +1,61 @@
+# Default values for nodejs.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    kubernetes.io/tls-acme: "true"
+  path: /
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+probesEnabled: true
+
+prometheus:
+  enabled: true
+  path: /metrics
+
+rabbitmq:
+  enabled: false
+  host:
+    envName: RABBIT_HOST
+    value: rabbitmq.default.svc.cluster.local
+  username:
+    envName: RABBIT_USERNAME
+    value: user
+  password:
+    envName: RABBIT_PASSWORD
+
+cloudsql:
+  enabled: false
+  credentials:
+    usernameEnvName: DB_USER
+    passwordEnvName: DB_PASSWORD
+  proxy:
+    resources:
+      limits:
+        cpu: 0.1
+        memory: 32Mi
+      requests:
+        cpu: 0
+        memory: 8Mi
