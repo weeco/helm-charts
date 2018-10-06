@@ -17,7 +17,7 @@ spec:
     metadata:
       annotations:
         prometheus.io/scrape: {{ .Values.prometheus.enabled | quote }}
-        prometheus.io/port: {{ if .Values.prometheus.port }}{{- .Values.prometheus.port | quote }}{{- else }}{{ .Values.service.port | quote }}{{- end }}
+        prometheus.io/port: {{ .Values.prometheus.port | default .Values.service.port | quote }}
         prometheus.io/path: {{ .Values.prometheus.path | quote }}
       labels:
         app: {{ template "nodejs.name" . }}
@@ -115,15 +115,15 @@ spec:
               containerPort: {{ required "service.port is required" .Values.service.port }}
               protocol: TCP
 
-          {{- if .Values.probesEnabled }}
+          {{- if .Values.probes.enabled }}
           livenessProbe:
             httpGet:
               path: /admin/healthcheck
-              port: http
+              port: {{ .Values.probes.port | default .Values.service.port | quote }}
           readinessProbe:
             httpGet:
               path: /admin/healthcheck
-              port: http
+              port: {{ .Values.probes.port | default .Values.service.port | quote }}
           {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
