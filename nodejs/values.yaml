@@ -14,10 +14,6 @@ ingress:
   enabled: false
   annotations: {}
   path: /
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 resources:
   limits:
