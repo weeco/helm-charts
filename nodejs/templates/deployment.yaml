@@ -112,18 +112,23 @@ spec:
 
           ports:
             - name: http
-              containerPort: {{ required "service.port is required" .Values.service.port }}
+              containerPort: {{ required "service.port is required" .Values.service.port | quote }}
               protocol: TCP
+            {{- if or (.Values.probes.port) (.Values.prometheus.port) }}
+            - name: admin
+              containerPort: {{ .Values.probes.port | default .Values.prometheus.port | quote }}
+              protocol: TCP
+            {{- end }}
 
           {{- if .Values.probes.enabled }}
           livenessProbe:
             httpGet:
               path: /admin/healthcheck
-              port: {{ .Values.probes.port | default .Values.service.port | quote }}
+              port: admin
           readinessProbe:
             httpGet:
               path: /admin/healthcheck
-              port: {{ .Values.probes.port | default .Values.service.port | quote }}
+              port: admin
           {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
