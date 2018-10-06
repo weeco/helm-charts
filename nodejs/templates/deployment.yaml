@@ -112,11 +112,11 @@ spec:
 
           ports:
             - name: http
-              containerPort: {{ required "service.port is required" .Values.service.port | quote }}
+              containerPort: {{ required "service.port is required" .Values.service.port }}
               protocol: TCP
             {{- if or (.Values.probes.port) (.Values.prometheus.port) }}
             - name: admin
-              containerPort: {{ .Values.probes.port | default .Values.prometheus.port | quote }}
+              containerPort: {{ .Values.probes.port | default .Values.prometheus.port }}
               protocol: TCP
             {{- end }}
 
