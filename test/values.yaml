@@ -1,0 +1,29 @@
+service:
+  port: 4200
+
+fullnameOverride: rest-api-v4
+
+replicaCount: 1
+
+rabbitmq:
+  enabled: true
+
+customEnvs:
+  - name: API_JWT_SECRET
+    value: bla
+  - name: API_AUTH_ENABLED
+    value: true
+  - name: API_QUEUE_LENGTH_LIMIT
+    value: 3000
+
+ingress:
+  enabled: true
+  hosts:
+    - api.domain.com
+
+probes:
+  port: 9900
+
+prometheus:
+  port: 9900
+  path: /admin/metrics

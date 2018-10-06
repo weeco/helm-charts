@@ -124,11 +124,19 @@ spec:
           livenessProbe:
             httpGet:
               path: /admin/healthcheck
-              port: admin
+              port: {{ if .Values.probes.port -}}
+                      admin
+                    {{- else -}}
+                      http
+                    {{- end }}
           readinessProbe:
             httpGet:
               path: /admin/healthcheck
-              port: admin
+              port: {{ if .Values.probes.port -}}
+                      admin
+                    {{- else -}}
+                      http
+                    {{- end }}
           {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
