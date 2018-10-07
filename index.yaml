@@ -3,11 +3,11 @@ entries:
   nodejs:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-10-07T01:54:15.5881158+02:00
+    created: 2018-10-07T02:37:00.5719043+02:00
     description: Helm chart for NodeJs deployments
-    digest: d9535be2a47d00aa69a4cafb508a4daf9a16262e807948061c961db56a7cb6b8
+    digest: 92aab2ec614a4858a7b2e60b7bc0fd1d65da056f2cf28a87067c649da3f3ff80
     name: nodejs
     urls:
-    - nodejs/nodejs-1.1.4.tgz
-    version: 1.1.4
-generated: 2018-10-07T01:54:15.587616+02:00
+    - nodejs/nodejs-1.1.5.tgz
+    version: 1.1.5
+generated: 2018-10-07T02:37:00.5714058+02:00
