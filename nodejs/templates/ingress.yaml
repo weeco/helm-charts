@@ -10,12 +10,12 @@ metadata:
     chart: {{ template "nodejs.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-{{- with .Values.ingress.annotations }}
   annotations:
     kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+{{- with .Values.ingress.annotations }}
 {{ toYaml . | indent 4 }}
 {{- end }}
 spec:
