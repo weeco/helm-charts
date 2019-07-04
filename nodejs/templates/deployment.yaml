@@ -124,7 +124,7 @@ spec:
           {{- if .Values.probes.enabled }}
           livenessProbe:
             httpGet:
-              path: /admin/healthcheck
+              path: {{ .Values.probes.livePath }}
               port: {{ if .Values.probes.port -}}
                       admin
                     {{- else -}}
@@ -132,7 +132,7 @@ spec:
                     {{- end }}
           readinessProbe:
             httpGet:
-              path: /admin/healthcheck
+              path: {{ .Values.probes.readyPath }}
               port: {{ if .Values.probes.port -}}
                       admin
                     {{- else -}}

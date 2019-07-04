@@ -31,6 +31,8 @@ affinity: {}
 
 probes:
   enabled: true
+  livePath: /admin/healthcheck
+  readyPath: /admin/healthcheck
   # port: 8899
 
 prometheus:
