@@ -38,9 +38,7 @@ prometheus:
   path: /metrics
   # port: 8899
 
-args:
-  - server.name=hello
-  - server.port=80
+args: {}
 
 rabbitmq:
   enabled: false
