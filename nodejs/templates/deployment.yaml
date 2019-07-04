@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ template "nodejs.fullname" . }}
   labels:
-    app: {{ template "nodejs.name" . }}
+    app: {{ template "nodejs.fullname" . }}
     chart: {{ template "nodejs.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -49,11 +49,12 @@ spec:
           resources:
 {{ toYaml .Values.cloudsql.proxy.resources | indent 12 }}
         {{- end }}
-
         - name: {{ .Chart.Name }}
           image: "{{ required "image.repository is required" .Values.image.repository }}:{{ required "image.tag is required" .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-
+          {{- with .Values.args }}
+          args: {{ . | toJson }}
+          {{- end }}
           env:
             - name: NODE_ENV
               value: production
