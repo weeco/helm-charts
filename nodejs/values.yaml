@@ -42,6 +42,9 @@ prometheus:
 
 args: {}
 
+gcloudServiceAccount: {}
+  # secretName:
+
 rabbitmq:
   enabled: false
   host:

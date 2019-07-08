@@ -29,6 +29,11 @@ spec:
           secret:
             secretName: cloudsql-instance-credentials
         {{- end }}
+        {{- if .Values.gcloudServiceAccount.secretName }}
+        - name: gcloud-service-account
+          secret:
+            secretName: {{ .Values.gcloudServiceAccount.secretName }}
+        {{- end }}
         {{- range .Values.customVolumes }}
         - name: {{ .secretName }}
           secret:
@@ -78,6 +83,11 @@ spec:
             {{- end }}
             {{- end }}
 
+            {{- if .Values.gcloudServiceAccount.secretName }}
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+            {{- end }}
+
             {{- with .Values.rabbitmq -}}
             {{- if .enabled }}
             - name: {{ .host.envName }}
@@ -106,6 +116,10 @@ spec:
             {{- end }}
 
           volumeMounts:
+            {{- if .Values.gcloudServiceAccount.secretName }}
+            - name: gcloud-service-account
+              mountPath: /var/secrets/google
+            {{- end }} 
             {{- range .Values.customVolumes }}
             - name: {{ .secretName }}
               mountPath: {{ .mountPath }}
